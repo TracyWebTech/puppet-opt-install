@@ -19,7 +19,7 @@
 define install_opt::install (
   $source,
   $compress_type = 'tgz',
-  $tmp_dir = '/tmp'
+  $tmp_dir       = '/tmp'
 ) {
 
   $source_split = split($source, '/')
@@ -43,14 +43,14 @@ define install_opt::install (
       require => Package["wget"],
     }
     file { "file-source-${file_name}":
-      ensure => present,
-      path => '/tmp/${file_name}',
+      ensure  => present,
+      path    => '/tmp/${file_name}',
       require => Exec["get-source-${file_name}"]
     }
   } elsif $protocol == 'puppet:'  {
     file { "file-source-${file_name}":
       ensure =>  present,
-      path => '/tmp/${file_name}',
+      path   => '/tmp/${file_name}',
       source => $source
     }
   }
