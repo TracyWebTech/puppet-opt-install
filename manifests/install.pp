@@ -26,11 +26,11 @@ define install_opt::install (
   $protocol = $source_split[0]
   $file_name = $source_split[-1]
 
-  if $protocol == 'http:' or $protocol == 'ftp:' {
+  Exec {
+    path => ['/usr/bin', '/bin']
+  }
 
-    Exec {
-      path => ['/usr/bin', '/bin']
-    }
+  if $protocol == 'http:' or $protocol == 'ftp:' {
 
     if !defined(Package['wget']) {
       package { 'wget':
